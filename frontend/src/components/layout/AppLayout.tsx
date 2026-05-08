@@ -12,6 +12,8 @@ const AppLayout = ({ children }: Props) => {
       sx={{
         display: "flex",
         minHeight: "100vh",
+        width: "100%",
+        overflowX: "hidden",
         background:
           "radial-gradient(circle at top left, rgba(37,99,235,0.1), transparent 28%), radial-gradient(circle at bottom right, rgba(14,165,233,0.08), transparent 24%), linear-gradient(180deg, #f3f7fc 0%, #eef3f9 100%)",
       }}
@@ -23,7 +25,9 @@ const AppLayout = ({ children }: Props) => {
         component="main"
         sx={{
           flexGrow: 1,
-          ml: "240px",
+          minWidth: 0,
+          width: "100%",
+          boxSizing: "border-box",
           minHeight: "100vh",
           p: { xs: 2.5, md: 4 },
         }}

@@ -24,27 +24,36 @@ const Topbar = () => {
       position="fixed"
       elevation={0}
       sx={{
-        width: "calc(100% - 240px)",
-        ml: "240px",
+        left: { xs: 0, md: "240px" },
+        width: { xs: "100%", md: "calc(100% - 240px)" },
         bgcolor: "transparent",
         color: "#0f172a",
         pt: 1,
-        px: 2,
+        px: { xs: 1, sm: 1.5, md: 2 },
       }}
     >
       <Toolbar
         sx={{
+          flexWrap: { xs: "wrap", md: "nowrap" },
           justifyContent: "space-between",
+          gap: { xs: 1.2, md: 2 },
           minHeight: "74px",
           borderRadius: 3,
           border: "1px solid rgba(148,163,184,0.22)",
           backgroundColor: "rgba(255,255,255,0.88)",
           backdropFilter: "blur(10px)",
           boxShadow: "0 10px 30px rgba(2,6,23,0.08)",
-          px: { xs: 2, md: 2.8 },
+          px: { xs: 1.5, sm: 2, md: 2.8 },
         }}
       >
-        <Box sx={{ display: "flex", alignItems: "center", gap: 1.6 }}>
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: { xs: "flex-start", sm: "center" },
+            gap: 1.6,
+            flexWrap: "wrap",
+          }}
+        >
           <Box>
             <Typography variant="h6" sx={{ fontWeight: 700, lineHeight: 1.2 }}>
               CRM Workspace
@@ -82,6 +91,7 @@ const Topbar = () => {
             fontWeight: 700,
             boxShadow: "none",
             bgcolor: "#2563eb",
+            ml: "auto",
             "&:hover": {
               bgcolor: "#1d4ed8",
               boxShadow: "none",

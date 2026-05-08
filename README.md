@@ -152,6 +152,21 @@ npm install
 npm run dev
 ```
 
+### 3) Root Dev Launcher
+
+From the project root, you can start both services together:
+
+```bash
+npm run dev
+```
+
+You can also run either service directly from the root with:
+
+```bash
+npm run dev:backend
+npm run dev:frontend
+```
+
 ---
 
 ## Database Behavior

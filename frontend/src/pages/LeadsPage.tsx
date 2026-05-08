@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import {Box,Button,Card,CardContent,Typography,TextField,MenuItem,} from "@mui/material";
+import {Box,Button,Card,CardContent,Typography,TextField,MenuItem,Stack,} from "@mui/material";
 
 import AddIcon from "@mui/icons-material/Add";
 
@@ -238,215 +238,154 @@ const LeadsPage = () => {
 
   return (
     <AppLayout>
-      <Box
-        sx={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-          mb: 2.5,
-        }}
-      >
-        <Box>
-          <Typography
-            variant="h4"
-            sx={{ fontWeight: 700, color: "#0f172a" }}
-          >
-            Leads
-          </Typography>
-
-          <Typography
-            variant="body2"
-            color="text.secondary"
-          >
-            Manage and track sales
-            leads.
-          </Typography>
-        </Box>
-
-        <Button
-          variant="contained"
-          startIcon={<AddIcon />}
-          onClick={() =>
-            setOpen(true)
-          }
+      <Stack spacing={3}>
+        <Box
           sx={{
-            borderRadius: 2,
-            px: 2,
-            py: 1,
-            fontWeight: 700,
-            boxShadow: "0 12px 26px rgba(37,99,235,0.26)",
+            display: "flex",
+            flexDirection: { xs: "column", md: "row" },
+            justifyContent: "space-between",
+            alignItems: { xs: "stretch", md: "center" },
+            gap: 2,
           }}
         >
-          Add Lead
-        </Button>
-      </Box>
+          <Box sx={{ minWidth: 0 }}>
+            <Typography
+              variant="h4"
+              sx={{ fontWeight: 700, color: "#0f172a", fontSize: { xs: 28, md: 34 } }}
+            >
+              Leads
+            </Typography>
 
-      <Box
-        sx={{
-          display: "grid",
-          gap: 1.5,
-          gridTemplateColumns: { xs: "1fr", md: "1.15fr repeat(3, minmax(180px, 1fr))" },
-          mt: 3,
-          p: 2,
-          borderRadius: 3,
-          border: "1px solid rgba(148,163,184,0.22)",
-          background: "rgba(255,255,255,0.78)",
-          boxShadow: "0 8px 20px rgba(2,6,23,0.04)",
-        }}
-      >
-        <TextField
-          label="Search Leads"
-          size="small"
-          value={search}
-          onChange={(e) =>
-            setSearch(e.target.value)
-          }
-          sx={{ minWidth: 260 }}
-        />
+            <Typography variant="body2" color="text.secondary">
+              Manage and track sales leads.
+            </Typography>
+          </Box>
 
-        <TextField
-          select
-          label="Status"
-          size="small"
-          value={statusFilter}
-          onChange={(e) =>
-            setStatusFilter(
-              e.target.value
-            )
-          }
-          sx={{ minWidth: 180 }}
-        >
-          <MenuItem value="">
-            All Statuses
-          </MenuItem>
-
-          <MenuItem value="New">
-            New
-          </MenuItem>
-
-          <MenuItem value="Contacted">
-            Contacted
-          </MenuItem>
-
-          <MenuItem value="Qualified">
-            Qualified
-          </MenuItem>
-
-          <MenuItem value="Proposal Sent">
-            Proposal Sent
-          </MenuItem>
-
-          <MenuItem value="Won">
-            Won
-          </MenuItem>
-
-          <MenuItem value="Lost">
-            Lost
-          </MenuItem>
-        </TextField>
-
-        <TextField
-          select
-          label="Lead Source"
-          size="small"
-          value={sourceFilter}
-          onChange={(e) =>
-            setSourceFilter(
-              e.target.value
-            )
-          }
-          sx={{ minWidth: 180 }}
-        >
-          <MenuItem value="">
-            All Sources
-          </MenuItem>
-
-          <MenuItem value="Website">
-            Website
-          </MenuItem>
-
-          <MenuItem value="LinkedIn">
-            LinkedIn
-          </MenuItem>
-
-          <MenuItem value="Referral">
-            Referral
-          </MenuItem>
-
-          <MenuItem value="Cold Email">
-            Cold Email
-          </MenuItem>
-
-          <MenuItem value="Event">
-            Event
-          </MenuItem>
-        </TextField>
-
-        {isAdmin && (
-          <TextField
-            select
-            label="Salesperson"
-            size="small"
-            value={salespersonFilter}
-            onChange={(e) =>
-              setSalespersonFilter(
-                e.target.value
-              )
-            }
-            sx={{ minWidth: 200 }}
+          <Button
+            variant="contained"
+            startIcon={<AddIcon />}
+            onClick={() => setOpen(true)}
+            fullWidth={false}
+            sx={{
+              alignSelf: { xs: "stretch", md: "center" },
+              borderRadius: 2,
+              px: 2.4,
+              py: 1,
+              fontWeight: 700,
+              boxShadow: "0 12px 26px rgba(37,99,235,0.26)",
+            }}
           >
-            <MenuItem value="">
-              All Salespersons
-            </MenuItem>
+            Add Lead
+          </Button>
+        </Box>
 
-            {users
-              .filter(
-                (user) =>
-                  user.role ===
-                  "salesperson"
-              )
-              .map((user) => (
-                <MenuItem
-                  key={user.id}
-                  value={user.name}
+        <Card
+          elevation={0}
+          sx={{
+            border: "1px solid rgba(148,163,184,0.22)",
+            borderRadius: 3,
+            background: "rgba(255,255,255,0.78)",
+            boxShadow: "0 8px 20px rgba(2,6,23,0.04)",
+          }}
+        >
+          <CardContent sx={{ p: { xs: 2, md: 2.5 } }}>
+            <Box
+              sx={{
+                display: "grid",
+                gap: 1.5,
+                gridTemplateColumns: {
+                  xs: "1fr",
+                  sm: "repeat(2, minmax(0, 1fr))",
+                  lg: isAdmin
+                    ? "minmax(240px, 1.4fr) repeat(3, minmax(0, 1fr))"
+                    : "minmax(240px, 1.6fr) repeat(2, minmax(0, 1fr))",
+                },
+              }}
+            >
+              <TextField
+                label="Search Leads"
+                size="small"
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                fullWidth
+              />
+
+              <TextField
+                select
+                label="Status"
+                size="small"
+                value={statusFilter}
+                onChange={(e) => setStatusFilter(e.target.value)}
+                fullWidth
+              >
+                <MenuItem value="">All Statuses</MenuItem>
+                <MenuItem value="New">New</MenuItem>
+                <MenuItem value="Contacted">Contacted</MenuItem>
+                <MenuItem value="Qualified">Qualified</MenuItem>
+                <MenuItem value="Proposal Sent">Proposal Sent</MenuItem>
+                <MenuItem value="Won">Won</MenuItem>
+                <MenuItem value="Lost">Lost</MenuItem>
+              </TextField>
+
+              <TextField
+                select
+                label="Lead Source"
+                size="small"
+                value={sourceFilter}
+                onChange={(e) => setSourceFilter(e.target.value)}
+                fullWidth
+              >
+                <MenuItem value="">All Sources</MenuItem>
+                <MenuItem value="Website">Website</MenuItem>
+                <MenuItem value="LinkedIn">LinkedIn</MenuItem>
+                <MenuItem value="Referral">Referral</MenuItem>
+                <MenuItem value="Cold Email">Cold Email</MenuItem>
+                <MenuItem value="Event">Event</MenuItem>
+              </TextField>
+
+              {isAdmin && (
+                <TextField
+                  select
+                  label="Salesperson"
+                  size="small"
+                  value={salespersonFilter}
+                  onChange={(e) => setSalespersonFilter(e.target.value)}
+                  fullWidth
                 >
-                  {user.name}
-                </MenuItem>
-              ))}
-          </TextField>
-        )}
-      </Box>
+                  <MenuItem value="">All Salespersons</MenuItem>
+                  {users
+                    .filter((user) => user.role === "salesperson")
+                    .map((user) => (
+                      <MenuItem key={user.id} value={user.name}>
+                        {user.name}
+                      </MenuItem>
+                    ))}
+                </TextField>
+              )}
+            </Box>
+          </CardContent>
+        </Card>
 
-      <Card
-        elevation={0}
-        sx={{
-          border: "1px solid rgba(148,163,184,0.24)",
-          borderRadius: 3,
-          background: "rgba(255,255,255,0.86)",
-          boxShadow: "0 12px 28px rgba(2,6,23,0.06)",
-          mt: 3,
-        }}
-      >
-        <CardContent sx={{ p: 1.2 }}>
-          <LeadTable
-            leads={filteredLeads}
-            onView={(id) =>
-              navigate(
-                `/leads/${id}`
-              )
-            }
-            onEdit={
-              handleEditClick
-            }
-            onDelete={
-              handleDelete
-            }
-            onStatusChange={
-              handleStatusChange
-            }
-          />
-        </CardContent>
-      </Card>
+        <Card
+          elevation={0}
+          sx={{
+            border: "1px solid rgba(148,163,184,0.24)",
+            borderRadius: 3,
+            background: "rgba(255,255,255,0.86)",
+            boxShadow: "0 12px 28px rgba(2,6,23,0.06)",
+          }}
+        >
+          <CardContent sx={{ p: 1.2 }}>
+            <LeadTable
+              leads={filteredLeads}
+              onView={(id) => navigate(`/leads/${id}`)}
+              onEdit={handleEditClick}
+              onDelete={handleDelete}
+              onStatusChange={handleStatusChange}
+            />
+          </CardContent>
+        </Card>
+      </Stack>
 
       <LeadFormDialog
         open={open}

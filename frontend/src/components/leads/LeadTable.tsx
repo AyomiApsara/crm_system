@@ -28,27 +28,32 @@ const LeadTable = ({ leads,onEdit,onDelete,onStatusChange,onView,
 }: Props) => {
 
   return (
-    <Table
-      sx={{
-        "& .MuiTableCell-head": {
-          fontSize: 12,
-          textTransform: "uppercase",
-          letterSpacing: 0.3,
-          color: "#64748b",
-          fontWeight: 700,
-          borderBottom: "1px solid rgba(148,163,184,0.26)",
-        },
-        "& .MuiTableCell-body": {
-          borderBottom: "1px solid rgba(226,232,240,0.8)",
-          color: "#1e293b",
-        },
-      }}
-    >
+    <Box sx={{ width: "100%", overflowX: "auto" }}>
+      <Table
+        sx={{
+          width: "100%",
+          minWidth: 1180,
+          "& .MuiTableCell-head": {
+            fontSize: 12,
+            textTransform: "uppercase",
+            letterSpacing: 0.3,
+            color: "#64748b",
+            fontWeight: 700,
+            borderBottom: "1px solid rgba(148,163,184,0.26)",
+            whiteSpace: "nowrap",
+          },
+          "& .MuiTableCell-body": {
+            borderBottom: "1px solid rgba(226,232,240,0.8)",
+            color: "#1e293b",
+            whiteSpace: "nowrap",
+          },
+        }}
+      >
       <TableHead>
         <TableRow>
           <TableCell>Lead Name</TableCell>
           <TableCell>Company</TableCell>
-          <TableCell> Email</TableCell>
+          <TableCell>Email</TableCell>
           <TableCell>Phone</TableCell>
           <TableCell>Lead Source</TableCell>
           <TableCell>Salesperson</TableCell>
@@ -196,7 +201,8 @@ const LeadTable = ({ leads,onEdit,onDelete,onStatusChange,onView,
           </TableRow>
         )}
       </TableBody>
-    </Table>
+      </Table>
+    </Box>
   );
 };
 
